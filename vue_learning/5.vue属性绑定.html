@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="div1">
+    <a :href="url.url" v-for="url,index in urls">{{index+1}}.{{url.name}}</a><br>
+</div>
+
+
+</body>
+<script>
+   var urldata=[
+       {name:'百度',url:'https://www.baidu.com/'},
+       {name:'京东',url:'https://www.jd.com/'},
+       {name:'小米',url:'https://www.mi.com/'},
+       {name:'腾讯',url:'https://www.tencent.com'},
+       ]
+    new Vue({
+        el:'#div1',
+        data:{
+            urls:urldata
+        }
+    });
+
+</script>
+</html>

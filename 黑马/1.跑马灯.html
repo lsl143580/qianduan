@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2生命周期</title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .redcolor{color: red}
+        .fontSize{font:30px/12px '微软雅黑'}
+    </style>
+</head>
+<body>
+<div id="div">
+    <input type="button" value="开始" @click="start">
+    <input type="button" value="停止😢" @click="end">
+<h4 style="">{{str}}</h4>
+</div>
+
+</body>
+<script>
+   var vm = new Vue({
+       el:'#div',
+       data:{
+           str:'------我是杨慧鹏------我是杨慧鹏------我是杨慧鹏------我是杨慧鹏------我是杨慧鹏------我是杨慧鹏------',
+           intervalId:''
+       },
+       methods:{
+           start(){
+               console.log("开始");
+               if (this.intervalId!='')
+                   return;
+               this_=this;
+               this.intervalId = setInterval(function () {
+                   var start =this_.str.substring(0,1);
+                   var end =this_.str.substring(1);
+                   this_.str = end+ start
+                   console.log(this_.str)
+               }, 100);
+           } ,
+           end(){
+               console.log("停止");
+               clearInterval(this.intervalId);
+               this.intervalId='';
+           }
+       }
+    });
+</script>
+</html>

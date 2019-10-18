@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue2模板语法</title>
+</head>
+<body>
+<div id="app1">
+    <input v-model="msg" />
+    <span v-once>{{msg}}</span>
+    <h3 v-text="msg"></h3>
+    <h3>{{msg}}</h3>
+    <h1>----------------------------------属性-----------------------------------</h1>
+
+    <button v-bind:disabled="disabled">我是一个按钮！</button><button @click="jyorqy">禁用/启用</button>
+    <h1>----------------------------------JavaScript表达式-----------------------------------</h1>
+    <div>{{'1,2,3'.split(",")}}</div>
+    <div>{{sex?'1':'0'}}</div><br>
+    <ul>
+        <li v-for="sj in sjdata">
+            <span v-if="sj.price>8000">超级高端手机__{{sj.name}}--￥{{sj.price}}</span>
+            <span v-else-if="sj.price>5000">高端手机__{{sj.name}}--￥{{sj.price}}</span>
+            <span v-else-if="sj.price>3500">中高端手机__{{sj.name}}--￥{{sj.price}}</span>
+            <span v-else-if="sj.price>2000">中端手机__{{sj.name}}--￥{{sj.price}}</span>
+            <span v-else>低端端手机__{{sj.name}}--￥{{sj.price}}</span>
+        </li>
+    </ul>
+    <h1>----------------------------------***-----------------------------------</h1>
+    <button @click="randomwen">随机</button>
+
+</div>
+<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var sjdata = [
+                    {price:5299,name:'华为p30 pro'},
+                    {price:3000,name:'小米9'},
+                    {price:4000,name:'vivo nex3'},
+                    {price:2680,name:'魅族16s pro'},
+                    {price:9000,name:'苹果11 pro'}
+                ];
+    var app1 = new Vue({
+        el: "#app1",
+        data:{
+            msg:"vue",
+            disabled:null,
+            sex:true,
+            sjdata:sjdata.sort(function (a, b) { return b.price-a.price })
+        },
+        methods:{
+            jyorqy:function () {//禁用或启用
+                this.disabled=!this.disabled;
+            },
+            randomwen:function () {
+                console.log(Math.random()>0.4?"xxx":"xx");
+            }
+        }
+    });
+
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        div.product{
+            float:left;
+            border:1px solid lightGray;
+            width:200px;
+            margin:10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h2>1.vue组件</h2>
+<div id="div1" style="padding-left: 20px">
+    <h3>    1.1vue局部组件</h3>
+    <product1></product1>
+    <div style="clear: both"></div>
+
+    <h3>    1.2vue全局组件</h3>
+    <product2></product2>
+    <div style="clear: both"></div>
+
+    <h3>    1.3vue静态带参数的组件</h3><!--
+    <product3 name1="双凤鞋垫"></product3>
+    <product3 name1="都市丽人"></product3>-->
+    <div style="clear: both"></div>
+
+    <h3>    1.4vue动态带参数的组件</h3>
+    <input type="text" name="proname" v-model="proname">
+
+    <product3 :product="pro" v-for="pro in products"></product3>
+
+    <div style="clear: both"></div>
+</div>
+
+
+</body>
+
+<script>
+    //全局组件
+    Vue.component('product2', {
+        template: '<div class="product" >MAXFEEL休闲男士手包真皮手拿包大容量信封包手抓包夹包软韩版潮2</div>'
+    });
+    //静态参数的组件
+    Vue.component('product3',{
+        props:['product','name1'],
+        template:'<div class="product" @click="increaseSale">{{product.name}} 销量: {{product.sale}}</div>',
+        methods:{
+            increaseSale:function () {
+                if (!this.product.sale) this.product.sale=0
+                this.product.sale++;
+            }
+        }
+    });
+   var products=[
+        {"name":"MAXFEEL休闲男士手包真皮手拿包大容量信封包手抓包夹包软韩版潮","sale":"18"},
+        {"name":"宾度 男士手包真皮大容量手拿包牛皮个性潮男包手抓包软皮信封包","sale":"35"},
+        {"name":"唯美诺新款男士手包男包真皮大容量小羊皮手拿包信封包软皮夹包潮","sale":"29"}
+    ]
+    new Vue({
+        el:"#div1",
+        data:{
+            proname:'',
+            products:products
+        },
+        components:{//局部组件
+            'product1':{
+                template:'<div class="product" >MAXFEEL休闲男士手包真皮手拿包大容量信封包手抓包夹包软韩版潮1</div>'
+            }
+        }
+    });
+
+
+</script>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+</head>
+<style>
+    table tr td{
+        border:1px solid gray;
+    }
+    table{
+        border-collapse:collapse;
+        width:300px;
+    }
+    tr.firstLine{
+        background-color: lightGray;
+    }
+</style>
+<body>
+<div id="div1">
+    <table align="center" >
+        <tr class="firstLine">
+            <td>序号</td>
+            <td>name</td>
+            <td>hp</td>
+        </tr>
+        <tr v-for="yx,index in yxdata">
+                <td>{{index+1}}</td>
+                <td :datavalue="yx.name">{{yx.name}}</td>
+                <td>{{yx.hp}}</td>
+        </tr>
+    </table>
+</div>
+<h4>2.xxxxxx</h4>
+<div id="div2">
+    <table align="center" >
+        <tr class="firstLine">
+            <td>序号</td>
+            <td>name</td>
+            <td>hp</td>
+        </tr>
+        <tr v-for="i in 10">
+            <td datavalue="i">{{i}}</td>
+            <td datavalue="i">{{i}}</td>
+            <td datavalue="i">{{i}}</td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    var data = [
+        {name:"盖伦",hp:341},
+        {name:"提莫",hp:225},
+        {name:"安妮",hp:427},
+        {name:"死歌",hp:893}
+    ];
+    new Vue({
+        el:'#div1',
+        data:{
+            yxdata:data
+        }
+    });
+    //
+    new Vue({
+        el:'#div2',
+        data:{
+
+        },
+        methods:function () {
+
+        }
+    });
+
+</script>
+</html>

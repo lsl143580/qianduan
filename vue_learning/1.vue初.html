@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+<div id="div1">
+{{message.name}},{{message.hp}}
+</div>
+
+<script>
+
+    //准备数据
+    var gareen = {"name":"盖伦","hp":616};
+
+    new Vue({
+        el:"#div1",
+        data:{
+            message:gareen
+        }
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        table tr td{
+            border:1px solid gray;
+            padding:10px;
+
+        }
+        table{
+            border-collapse:collapse;
+            width:800px;
+            table-layout:fixed;
+        }
+        tr.firstLine{
+            background-color: lightGray;
+        }
+    </style>
+</head>
+<body>
+<h3>1.数据绑定hello World</h3>
+<div id="div1">
+    <h1>{{name}}</h1>
+    <input type="text" @input="inputdata" name="name" v-model="name" >
+    <input type="button" @click="submit" value="提交表单" >
+</div>
+<h3>2.数据绑定的多种风格</h3>
+<div id="div2">
+    <table align="center" >
+        <tr class="firstLine">
+            <td>视图类型</td>
+            <td>输入数据</td>
+            <td>绑定到Vue上的数值</td>
+        </tr>
+        <tr>
+            <td>单行文本</td>
+            <td>
+                <input type="text" v-model="unilinetext" placeholder="输入数据">
+            </td>
+            <td>{{unilinetext}}</td>
+        </tr>
+        <tr>
+            <td>多行文本</td>
+            <td>
+                <textarea placeholder="输入数据" v-model="multitext"></textarea>
+            </td>
+            <td>{{multitext}}</td>
+        </tr>
+        <tr>
+            <td>单个复选框 </td>
+            <td>
+                <input type="checkbox" v-model="onecheckbox">
+            </td>
+            <td>{{onecheckbox}}</td>
+        </tr>
+        <tr>
+            <td>多个复选康</td>
+            <td>
+                <input type="checkbox" id="teemo" value="teemo" v-model="multicheckbox">
+                <label for="teemo">teemo</label>
+                <input type="checkbox" id="gareen" value="gareen" v-model="multicheckbox">
+                <label for="gareen">gareen</label>
+                <input type="checkbox" id="annie" value="annie" v-model="multicheckbox">
+                <label for="annie">annie</label>
+            </td>
+            <td>
+                {{multicheckbox}}
+            </td>
+        </tr>
+        <tr>
+            <td>单选按钮</td>
+            <td>
+                <input id="nan" type="radio" value="男" v-model="radio">
+                <label for="nan">男</label>
+                <input id="nv" type="radio" value="女" v-model="radio">
+                <label for="nv">女</label>
+            </td>
+            <td>{{radio}}</td>
+        </tr>
+        <tr>
+            <td>单选选择框</td>
+            <td>
+                <select  v-model="oneselect" size="5">
+                    <option value="小狗">小狗</option>
+                    <option value="小猫">小猫</option>
+                    <option value="小兔子">小兔子</option>
+                </select>
+            </td>
+            <td>{{oneselect}}</td>
+        </tr>
+        <tr>
+            <td>多选选择框</td>
+            <td>
+                <select  v-model="multiselect" multiple size="5">
+                    <option value="小狗">小狗</option>
+                    <option value="小猫">小猫</option>
+                    <option value="小兔子">小兔子</option>
+                </select>
+            </td>
+            <td>{{multiselect}}</td>
+        </tr>
+        <tr>
+            <td> 单个复选框</td>
+            <td>
+                默认值是true或者false,也可以修改为自定义的值<br>
+                <input type="checkbox" id="toggle" true-value="同意" false-value="不同意" v-model="toggle">
+            </td>
+            <td>{{toggle}}</td>
+        </tr>
+    </table>
+</div>
+<h3>3.数据绑定的修饰符</h3>
+<div id="div3">
+    <h5>.lazy</h5>
+    <h1>{{name}}</h1>
+    <input type="text" name="name" v-model.lazy="name" >
+
+    <h5>.number</h5>
+    <h1>{{typeof age}}</h1>
+    <input type="number" name="age" v-model.number="age" >
+
+    <h5>.trim</h5>
+    <h1>[{{trim}}]</h1>
+    <input type="text" name="trim" v-model.trim="trim" >
+</div>
+</body>
+<script>
+    //1.数据绑定hello World
+    new Vue({
+        el:'#div1',
+        data:{
+            name:""
+        },
+        methods:{
+            submit:function () {
+                alert("提交成功！---name:"+this.name);
+            },
+            inputdata:function () {
+                console.log(this.name);
+            }
+        }
+    });
+    //2.数据绑定的多种风格
+    new Vue({
+        el:'#div2',
+        data:{
+            unilinetext:'',//单行文本
+            multitext:'',//多行文本
+            onecheckbox:true,//单个复选框
+            multicheckbox:[],//多个复选框
+            radio:'男',//单选框
+            oneselect:'',//单选选择框
+            multiselect:[],//多选选择框
+            toggle:'同意'
+        }
+    });
+    //3.数据绑定的修饰符
+    new Vue({
+        el:'#div3',
+        data:{
+            name:'',
+            age:'',
+            trim:''
+        }
+    });
+</script>
+</html>

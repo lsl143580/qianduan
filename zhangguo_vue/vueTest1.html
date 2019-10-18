@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2生命周期</title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .redcolor{color: red}
+        .fontSize{font:30px/12px '微软雅黑'}
+        .lala{width: 20px}
+        .onScroll{height:800px;
+            background: #00ff3b;}
+    </style>
+</head>
+<body>
+<div id="div">
+    <button-counter linshi="********"></button-counter>
+<div >
+    <button-counter v-bind="ren" @gbkd="postFontSize += 4" :style="{ width: postFontSize + 'px' }"></button-counter>
+</div>
+
+</div>
+</body>
+<script>
+    // vue全局组件--------------------------------------------------------
+    Vue.component('button-counter', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        props:['name','age'],
+        template: '<button v-on:click="$emit(\'gbkd\')" v-on:click="count++" :data_name="name" :data_age="age" >You clicked me {{ count }} times.</button>'
+    });
+
+    // vue实例-----------------------------------------------------------
+    var vm =new Vue({
+        el:'#div',
+        data:{
+            ren:{name:'李帅龙',age:22},
+            postFontSize: 40
+        }
+    });
+
+</script>
+</html>

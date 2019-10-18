@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+</head>
+<style type="text/css">
+    div {
+        width: 100px;
+        cursor:pointer;
+    }
+    #grandFather {
+        background: green;
+    }
+    #father {
+        background: blue;
+    }
+    #me {
+        background: red;
+    }#son {
+         background: gray;
+     }
+</style>
+<body>
+
+<h1>1.简单的事件监听</h1>
+<div id="div1">
+
+    <div>一共点击了  {{clickNumber}}次</div>
+    <button v-on:click="count">点击1</button>
+    <button @click="count">点击2</button>
+</div>
+
+<h1>2.事件冒泡</h1>
+<div id="div2">
+    <div id="grandFather" @click.capture="doc">
+        grandFather
+        <div id="father" @click.self="doc">
+            father
+            <div id="me" @click.stop="doc">
+                me
+                <div id="son" @click="doc">
+                    son
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1>3.禁用超链接或者表单提交</h1>
+<div id="div3">
+
+    <a href="http://12306.com" @click="jump" >正常的链接 http://12306.com</a>
+
+    <br>
+    <a href="http://12306.com" @click.prevent="jump" >prevent jump()之后的链接 http://12306.com</a>
+    <br>
+    <a href="http://12306.com" @click.prevent >纯prevent之后的链接 http://12306.com</a>
+
+    <br>
+    <br>
+    <form @submit="jump" action="http://12306.com">
+        <button type="submit">正常的form</button>
+    </form>
+    <form @submit.prevent="jump" action="http://12306.com">
+        <button type="submit">prevent jump()之后的form</button>
+    </form>
+    <form @submit.prevent action="http://12306.com">
+        <button type="submit">纯prevent之后的form</button>
+    </form>
+
+</div>
+
+</body>
+<script>
+    //1.简单的事件监听
+    new Vue({
+        el:"#div1",
+        data:{
+         clickNumber:0
+        },
+        methods:{
+            count:function () {
+                this.clickNumber++;
+                console.log(this);
+            }
+        }
+    });
+
+    //2.事件冒泡
+    new Vue({
+        el:"#div2",
+        data:{
+            id:''
+        },
+        methods:{
+            doc:function () {
+                this.id = event.currentTarget.id;
+                alert(this.id);
+            }
+        }
+    });
+    //3.禁用超链接或者表单提交
+    new Vue({
+        el:"#div3",
+        data:{
+        },
+        methods:{
+            jump:function(){
+                alert("jump()函数被调用");
+            }
+        }
+    });
+</script>
+</html>

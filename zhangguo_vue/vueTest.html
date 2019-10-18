@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2生命周期</title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .redcolor{color: red}
+        .fontSize{font:30px/12px '微软雅黑'}
+        .lala{width: 20px}
+        .onScroll{height:800px;
+            background: #000;}
+    </style>
+</head>
+<body>
+<div id="div1">
+
+
+<span v-bind:[classa]="colorclass" >666{{now}}</span><br>
+    <input :class="{lala:true}" type="text" v-model="input1" ><span  class="fontSize" v-bind:class="{ redcolor : isclass }">{{input1puls}}</span>
+    <input type="checkbox" v-model="isclass"><br>
+    <span :class="[{redcolor:isclass},fontSize]">龙</span><br>
+    <div id="divchild" :style="divchild">龙1</div>
+    <template v-if="ismb">
+        <div  style="background:#d0ed88;">1111</div>
+        <div  style="background:#d0ed88;">1111</div>
+        <input type="text" placeholder="111" key="111">
+    </template>
+    <template v-else >
+        <div  style="background:#d0ed88;">2222</div>
+        <div  style="background:#d0ed88;">2222</div>
+        <input type="text" placeholder="222" key="222">
+    </template>
+    <input type="checkbox" v-model="ismb" ><br>
+
+    <div style="color: cornflowerblue;display: inline-block" v-show="isshow">v-show</div>
+    <input type="checkbox" v-model="isshow" ><br>
+    <ul>
+        <li v-for="pen in pendata" @click="deleteAndLi(pen)">
+            {{pen}}--{{pen.name}}--{{qhsex(pen.sex)}}--{{pen.sex==2?'女':'男'}}--{{qhsex1(pen.sex)}}
+            <span v-for="(val,k) in pen "> {{k}}:{{val}}</span>
+        </li>
+    </ul>
+    <button @click="addlidom()">加</button><br>
+    <button @click="linhsi()">加{{userProfile.favoriteColor}}</button><br>
+
+    <button @click.prevent="jinyongshijian('jinyongshijian',$event)">虽然我被设置了事件，但是我的事件被禁用啦！！</button>
+
+    <div v-on:scroll="onScroll" :class="['onScroll']"></div><br>
+
+    <input v-on:keyup.enter="submit" v-model="searchval">
+
+</div>
+
+</body>
+<script>
+    var pendata =[
+        {name:'小明',sex: 1},
+        {name:'小红',sex: 2},
+        {name:'小丽',sex: 2},
+        {name:'小黑',sex: 1}
+    ];
+
+    var vm = new Vue({
+        el:'#div1',
+        data:{
+            colorclass:'redcolor',
+            input1:'123',
+            isclass:true,
+            redcolor:'redcolor',
+            fontSize:'fontSize',
+            ismb:true,
+            isshow:true,
+            pendata:pendata,
+            userProfile:{},
+            searchval:''
+        },
+        computed:{
+            classa() {
+                return 'clas'+'s';
+            },
+            now() {
+                console.log("计算属性now，开始初始化！")
+                return Date.now()+this.colorclass;
+            },
+            input1puls:{
+                get: function () {
+                    var fzstr = this.input1.split("").reverse().join("");
+                    return fzstr;
+                },
+                set: function (aa) {
+                    console.log(aa + "-----");
+                }
+            },
+            divchild(){
+                var cssstyle={
+                    color: 'red',
+                    fontSize: '13px',
+                    height:'50px',
+                    background:'green'
+                };
+                return cssstyle;
+            },
+            qhsex1(){
+                return function (num) {
+                    return num==2?'女':'男';
+                }
+            }
+        },
+        watch:{//属性监听器(计算属性和普通属性都可以进行监听)
+            isclass(newval, oldVal){
+                console.log("当前的值："+newval);
+                console.log("旧的值："+oldVal);
+            },
+            input1puls(newval, oldVal){
+                console.log("当前的值："+newval);
+                console.log("旧的值："+oldVal);
+            },
+            pendata(newval, oldVal){
+                console.log("当前的值："+JSON.stringify(newval));
+                console.log("旧的值："+JSON.stringify(oldVal));
+            }
+        },
+        methods:{
+            qhsex(num){
+                return num==2?'女':'男';
+            },
+            addlidom(){
+                this.pendata.push({name:'小刚',sex:parseInt(Math.random()*1000)});
+            },
+            deleteAndLi(_this){
+                console.log(JSON.stringify(_this));
+                for (let i = 0; i <this.pendata.length ; i++) {
+                    if (this.pendata[i]==_this){
+                        this.pendata.splice(i,1);
+                    }
+                }
+            },
+            linhsi(){
+                vm.userProfile = Object.assign({}, vm.userProfile, {
+                    age: 27,
+                    favoriteColor: 'Vue Green'
+                });
+            },
+            jinyongshijian(str,event){
+                event.preventDefault();
+                console.log(str);
+                alert(1);
+            },
+            onScroll(){
+                console.log(1234);
+            },
+            submit(){
+                console.log("-->> 搜索中("+this.searchval+")................")
+            }
+        },
+        updated: function () {
+            this.$nextTick(function () {
+                console.log('-------------------示例的属性发生了变化！！！-----------------------');
+            })
+        }
+    });
+    vm.pendata.push({name:'小刚',sex:parseInt(Math.random()*1000)});
+
+</script>
+</html>

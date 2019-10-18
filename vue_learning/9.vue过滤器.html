@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        table tr td{
+            border:1px solid gray;
+            padding:10px;
+
+        }
+        table{
+            border-collapse:collapse;
+            width:800px;
+            table-layout:fixed;
+        }
+        tr.firstLine{
+            background-color: lightGray;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+
+    <table align="center" >
+        <tr class="firstLine">
+            <td>输入数据</td>
+            <td>过滤后的结果</td>
+        </tr>
+        <tr>
+            <td align="center">
+                <input v-model= "data"  />
+            </td>
+            <td align="center">
+                {{ data|capitalize|capitalizeLastLetter }}
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+<script>
+    //注册全局过滤器
+    Vue.filter("capitalize",function (val) {
+        if (!val) return '';//如果为空,则返回空的字符串
+        val = val.toString();
+        console.log('capitalize:'+val);
+        return val.charAt(0).toUpperCase() + val.substring(1);
+    });
+    Vue.filter("capitalizeLastLetter",function (val) {
+        if (!val) return '';
+        val = val.toString();
+        console.log('capitalizeLastLetter:'+val);
+        return val.substring(0,val.length-1)+val.charAt(val.length-1).toUpperCase();
+    });
+
+    new Vue({
+        el:'#div1',
+        data:{
+            data:'abc'
+        },
+        filters:{ //局部过滤器
+            /*capitalize:function (val) {//首字母大写
+                if (!val) return '';//如果为空,则返回空的字符串
+                val = val.toString();
+                console.log('capitalize:'+val);
+                return val.charAt(0).toUpperCase() + val.substring(1);
+            },
+            capitalizeLastLetter:function (val) {//最后一个字母大写
+                if (!val) return '';
+                val = val.toString();
+                console.log('capitalizeLastLetter:'+val);
+                return val.substring(0,val.length-1)+val.charAt(val.length-1).toUpperCase();
+            }*/
+        },
+        watch:{
+            data:function (val) {
+                return val;
+            }
+        }
+    });
+
+
+</script>
+
+</html>

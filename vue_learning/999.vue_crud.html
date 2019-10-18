@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../plugin/jquery/jquery.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <style type="text/css">
+        td{
+            border:1px solid gray;
+        }
+
+        table{
+            border-collapse:collapse;
+        }
+
+        div#app{
+            margin:20px auto;
+            width:400px;
+            padding:20px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <table id="heroListTable" >
+        <thead>
+        <tr>
+            <th>英雄名称</th>
+            <th>血量</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="hero in heros ">
+            <td>{{hero.name}}</td>
+            <td>{{hero.hp}}</td>
+            <td>
+                <a href="#nowhere" @click="edit(hero)">编辑</a>
+            </td>
+            <td>
+                <a href="#nowhere" @click="deleteHero(hero.id)">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                英雄名称:
+                <input type="text" v-model="hero4Add.name" />
+                <br>
+                血量：
+                <input type="number" v-model="hero4Add.hp"/>
+                <br>
+                <button type="button"  v-on:click="add">增加</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="div4Update">
+        英雄名称:
+        <input type="text"    v-model="hero4Update.name" />
+        <br>
+        血量：
+        <input type="number"    v-model="hero4Update.hp" />
+        <input type="hidden"    v-model="hero4Update.id" />
+        <br>
+        <button type="button"  v-on:click="update">修改</button>
+        <button type="button"  v-on:click="cancel">取消</button>
+
+    </div>
+
+</div>
+</body>
+<script type="text/javascript">
+    //修改区域隐藏起来先
+    $("#div4Update").hide();
+    //Model
+    var data = {
+        heros: [
+            { id: 1, name: '盖伦', hp: 318},
+            { id: 2, name: '提莫', hp: 320},
+            { id: 3, name: '安妮', hp: 419},
+            { id: 4, name: '死歌', hp: 325},
+            { id: 5, name: '米波', hp: 422},
+        ],
+        hero4Add: { id: 0, name: '', hp: '0'},
+        hero4Update: { id: 0, name: '', hp: '0'},
+        hero4Update1: { id: 0, name: '', hp: '0'}
+    };
+    //用于记录最大id值
+    var maxId = 4;
+    //计算最大值
+    for (var i=0;i<data.heros.length;i++){
+        console.log(i+":"+maxId);
+        if (data.heros[i].id > maxId){
+            maxId=  data.heros[i].id;
+            console.log(maxId)
+        }
+    }
+    new Vue({
+        el:'#app',
+        data:data,
+        methods: {
+            add: function (event) {//新增
+                //获取最大id
+                maxId++;
+                //赋予新id
+                this.hero4Add.id = maxId;
+                if (this.hero4Add.name.length==0)
+                    this.hero4Add.name="Hero#"+maxId;
+                //把对象加入到数组
+                this.heros.push(this.hero4Add);
+                //让 hero4Add 指向新的对象
+                this.hero4Add = { id: 0, name: '', hp: '0'}
+            },
+            deleteHero:function (heroid) {
+                console.log("已删除id为"+heroid+"的英雄！");
+                for (var i = 0; i <this.heros.length ; i++) {
+                    if (this.heros[i].id==heroid){
+                        this.heros.splice(i,1);
+                        break;
+                    }
+                }
+            },
+            edit:function (hero) {
+                $("#heroListTable").hide();
+                $("#div4Update").show();
+                this.hero4Update=hero;
+               console.log(JSON.stringify(this.hero4Update));
+            },
+            update:function () {//跟新
+
+                this.cancel();
+            },
+            cancel:function () {//取消
+                $("#heroListTable").show();
+                $("#div4Update").hide();
+                this.hero4Update = { id: 0, name: '', hp: '0'};
+            }
+        }
+    });
+</script>
+</html>

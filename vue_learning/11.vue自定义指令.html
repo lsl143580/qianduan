@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="div1">
+    <h3>1.无参的指令</h3>
+    <span v-qjredcolor>asd asd </span>
+
+    <h3>2.有参的指令</h3>
+    <span v-youisshei="{name:'王恒博'}">6666666666........</span>
+
+</div>
+</body>
+<script>
+    Vue.directive('qjredcolor',function (el) {//无参的指令
+        el.innerHTML = el.innerHTML + ' 李帅龙 ';
+        el.style.color = 'pink';
+    });
+    Vue.directive('youisshei',function (el,param) {//有参的指令
+        el.innerHTML = el.innerHTML + param.value.name;
+        el.style.color = 'pink';
+    });
+
+    new Vue({
+        el:'#div1',
+        directives:{//局部指令
+            redcolor:function (this_) {
+                this_.innerHTML = this_.innerHTML + ' ( x-art ) '
+                this_.style.color = 'pink'
+            }
+        }
+    });
+</script>
+</html>

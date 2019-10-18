@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        table tr td{
+            border:1px solid gray;
+            padding:10px;
+
+        }
+        table{
+            border-collapse:collapse;
+            width:800px;
+            table-layout:fixed;
+        }
+        tr.firstLine{
+            background-color: lightGray;
+        }
+    </style>
+</head>
+<body>
+<h3>1.没有使用计算属性</h3>
+<div id="div1">
+    <table align="center" >
+        <tr class="firstLine">
+            <td>人民币</td>
+            <td>美元</td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2">
+                汇率： <input type="number" v-model.number="exchange" />
+            </td>
+        </tr>
+
+        <tr>
+
+            <td align="center">
+                ￥: <input type="number" v-model.number = "rmb"  />
+            </td>
+            <td align="center">
+                $: {{ rmb/exchange }}
+            </td>
+        </tr>
+    </table>
+</div>
+<h3>2.使用了计算属性</h3>
+<div id="div2">
+    <table align="center" >
+        <tr class="firstLine">
+            <td>人民币</td>
+            <td>美元</td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2">
+                汇率： <input type="number" v-model.number="exchange" />
+            </td>
+        </tr>
+
+        <tr>
+
+            <td align="center">
+                ￥: <input type="number" v-model.number = "rmb"  />
+            </td>
+            <td align="center">
+                $: {{ dollar }}<br>
+                $: {{ dollar1() }}
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    //1.没有使用计算属性
+    new Vue({
+        el:'#div1',
+        data:{
+            exchange:7,
+            rmb:0
+        }
+    });
+    //2.使用了计算属性
+    new Vue({
+        el:'#div2',
+        data:{
+            exchange:7,
+            rmb:0
+        },
+        computed:{
+            dollar:function () {
+                return this.rmb/this.exchange;
+            } 
+        },
+        methods:{
+            dollar1:function () {
+                return this.rmb/this.exchange;
+            }
+        }
+    });
+</script>
+
+</html>

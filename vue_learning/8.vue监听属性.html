@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        table tr td{
+            border:1px solid gray;
+            padding:10px;
+
+        }
+        table{
+            border-collapse:collapse;
+            width:800px;
+            table-layout:fixed;
+        }
+        tr.firstLine{
+            background-color: lightGray;
+        }
+    </style>
+</head>
+<body>
+
+<div id="div1">
+
+    <table align="center" >
+        <tr class="firstLine">
+            <td>人民币</td>
+            <td>美元</td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2">
+                汇率： <input type="number" v-model.number="exchange" />
+            </td>
+        </tr>
+
+        <tr>
+
+            <td align="center">
+                ￥: <input type="number" v-model.number = "rmb"  />
+            </td>
+            <td align="center">
+                $: <input type="number" v-model.number = "dollar"   />
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+<script>
+
+    var vm =new Vue({
+        el:'#div1',
+        data:{
+            exchange:6.4,
+            rmb:0,
+            dollar:0
+        },
+        watch:{
+            rmb:function (val) {
+                console.log(val);
+                this.rmb=val;
+                this.dollar=this.rmb/this.exchange;
+            },
+            dollar:function (val) {
+                console.log(val);
+                this.dollar=val;
+                this.rmb=this.dollar*this.exchange;
+            }
+        },
+        methods:{
+            laal:function () {
+                alert();
+            }
+        }
+
+    });
+   console.log(vm.$options);
+</script>
+</html>

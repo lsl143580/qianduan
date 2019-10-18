@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue2 Demo</title>
+</head>
+<body>
+<div id="app01">
+</div>
+<button type="button" onclick="mount01()">手动挂载方法1</button>
+<button type="button" onclick="mount02()">手动挂载方法2</button>
+<button type="button" onclick="mount03()">手动挂载方法3</button>
+<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var vm = new Vue({
+        data: {
+            name: 'zhangguo'
+        },
+        template:'<h2>{{name}}</h2>'
+    });
+
+    function mount01() {
+        //方法1
+        //手动挂载到指定DOM
+        vm.$mount("#app01");
+    }
+
+    function mount02() {
+        //方法1
+        //手动挂载，触发编译
+        vm.$mount();
+        //将编译生成的内容元素添加到要挂载的DOM中，作为子元素
+        document.getElementById("app01").appendChild(vm.$el);
+    }
+
+    function mount03() {
+        //扩展出一个新的Vue构造器
+        var Component01=Vue.extend({
+            template:"<h2>{{name}}</h2>"
+        });
+
+        var c01=new Component01({
+            data: {
+                name: 'zhangguo'
+            },
+            el:"#app01"
+        });
+    }
+
+</script>
+</body>
+</html>

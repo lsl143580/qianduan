@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2生命周期</title>
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .redcolor{color: #ee8438
+        }
+        .fontSize{font:30px/12px '微软雅黑'}
+    </style>
+</head>
+<body>
+
+<div id="div">
+    <input type="text" v-model="qnum">
+    <select v-model="fuhao" >
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" v-model="hnum" >
+    <input type="button" @click="jsjg" value="=">
+    <input type="text" v-model="jg" >
+</div>
+
+</body>
+<script>
+    var vm = new Vue({
+        el:'#div',
+        data:{
+            qnum:0,
+            hnum:0,
+            jg:0,
+            fuhao:'+'
+        },
+        methods:{
+            jsjg(){
+                var codeStr = parseInt(this.qnum)+this.fuhao+parseInt(this.hnum)
+                this.jg=eval(codeStr);
+            }
+        }
+    });
+</script>
+</html>

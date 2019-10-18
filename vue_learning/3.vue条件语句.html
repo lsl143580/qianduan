@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="div1">
+    <span v-if="show">我是你爸爸！</span>
+    <span v-else>我不是你爸爸！</span>
+
+    <button @click="toggle">切换隐藏显示</button>
+</div>
+
+<div id="div2">
+    <button @click="toggle">上辈子是个什么！    <samp>{{random}}</samp></button>
+    <span v-if="num>90">猪</span>
+    <span v-else-if="num>80">狗</span>
+    <span v-else-if="num>70">兔子</span>
+    <span v-else-if="num>60">老鼠</span>
+    <span v-else-if="num>50">猫</span>
+    <span v-else>人</span>
+
+</div>
+
+<script>
+    //div1
+   new Vue({
+       el:'#div1',
+       data:{
+           show:true
+       },
+       methods:{
+         toggle:function () {
+             this.show=!this.show;
+         }  
+       }
+   });
+
+   // div2
+    new Vue({
+        el:'#div2',
+        data:{
+            num:0,
+            random:0
+        },
+        methods:{
+            toggle:function() {
+               this.random= Math.random();
+                this.num=this.random*100;
+                console.log(this.random);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
