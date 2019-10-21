@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="plugin/bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="plugin/bootstrap-3.3.5/js/bootstrap.js"></script>
+    <![endif]-->
+    <style>
+        .slh{
+            width: 20px;
+            overflow: hidden;/*超出部分隐藏*/
+            white-space: nowrap;/*不换行*/
+            text-overflow:ellipsis;/*超出部分文字以...显示*/
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Hello, world!</h1>
+        <p>...</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix ">
+            <h2>Panel heading without title</h2>
+            <button id="id_bac1k" onclick="javascript:history.back()" style="margin-bottom: 5px;display: block" class="btn btn-primary  btn-sm  pull-right" >< 返回</button>
+        </div>
+        <div class="panel-body clearfix">
+            <h4>Panel heading without title</h4>
+            <h5>开始时间：<span id="starttime"></span></h5>
+            <h5>结束时间：<span id="endtime"></span></h5>
+            <button onclick="M.addOrXuanxiang()" style="margin-bottom: 5px;display: block" class="btn btn-success  btn-sm  pull-right" >添加投票选项</button>
+        </div>
+    </div>
 
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.0/lib/index.css">
+
+    <!-- 引入组件 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.0/lib/vant.min.js"></script>
+
+    <script>
+        var Vue = window.Vue;
+        var vant = window.vant;
+
+        // 注册 Lazyload 组件
+        Vue.use(vant.Lazyload);
+
+        // 调用函数式组件
+        vant.Toast('提示');
+    </script>
+    <van-button type="default">默认按钮</van-button>
+    <van-button type="primary">主要按钮</van-button>
+    <van-button type="info">信息按钮</van-button>
+    <van-button type="warning">警告按钮</van-button>
+    <van-button type="danger">危险按钮</van-button>
+    <div class="slh">123456789112345678911234567891123456789123456789234567891234567891123456789112345678911234567891123456789123456789234567891234567891234567892345678912345678911234567891234567892345678912345678912345678923456789234567892345678912345678911234567891234567892345678912345678912345678923456789</div>
+</div>
 </body>
 </html>
