@@ -1,2 +1,1 @@
-# qianduan
-李帅龙的vue学习笔记练习
+前端练习小model
